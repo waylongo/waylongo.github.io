@@ -1,7 +1,7 @@
 {
   "name": "waylongo-pages",
   "type": "module",
-  "version": "5.5.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
@@ -13,10 +13,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/sitemap": "^3.7.2",
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.6",
+    "astro": "^6.1.7",
     "dayjs": "^1.11.19",
     "lodash.kebabcase": "^4.1.1",
     "remark-collapse": "^0.1.2",
@@ -27,7 +27,7 @@
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.6",
+    "@astrojs/check": "^0.9.8",
     "@shikijs/transformers": "^3.20.0",
     "@tailwindcss/typography": "^0.5.19",
     "@types/lodash.kebabcase": "^4.1.9",
@@ -40,5 +40,8 @@
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.51.0"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
