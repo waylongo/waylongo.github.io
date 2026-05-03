@@ -1,6 +1,6 @@
 ---
 author: Wenlong Wu
-pubDatetime: 2026-04-17T20:30:00+08:00
+pubDatetime: 2026-03-17T20:30:00+08:00
 title: 为什么我想把项目过程公开写下来
 featured: false
 draft: false
