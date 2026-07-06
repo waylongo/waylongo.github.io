@@ -14,15 +14,28 @@ const posts = await getCollection("blog");
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+
+const trainingSlides = [
+  {
+    year: "2026",
+    title: "2026 AI Training Slides",
+    href: "/slides/2026-ai-training.pdf",
+    participants: "210 participants",
+  },
+  {
+    year: "2025",
+    title: "2025 AI Training Slides",
+    href: "/slides/2025-ai-training.pdf",
+    participants: "140 participants",
+  },
+];
 ---
 
 <Layout>
   <Header />
   <main id="main-content" data-layout="index" class="app-layout">
     <section id="hero" class:list={["pt-8 pb-6", "border-b border-border"]}>
-      <p>
-        Hi 👋 , this is Waylon.
-      </p>
+      <p>Hi 👋 , this is Waylon.</p>
       <p class="mt-2">
         I’m documenting my ideas and learning notes in this blog.
       </p>
@@ -32,10 +45,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       featuredPosts.length > 0 && (
         <section
           id="featured"
-          class:list={[
-            "pt-12 pb-6",
-            { "border-b border-border": recentPosts.length > 0 },
-          ]}
+          class:list={["pt-12 pb-6", "border-b border-border"]}
         >
           <h2 class="text-2xl font-semibold tracking-wide">Featured Writing</h2>
           <ul>
@@ -46,6 +56,46 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         </section>
       )
     }
+
+    <section
+      id="training-slides"
+      class:list={["pt-12 pb-6", "border-b border-border"]}
+    >
+      <h2 class="text-2xl font-semibold tracking-wide">AI Training Slides</h2>
+      <p class="mt-2">Slides from recent AI training sessions.</p>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+        {
+          trainingSlides.map(slide => (
+            <li>
+              <a
+                href={slide.href}
+                class:list={[
+                  "group block h-full border border-border bg-muted/20 p-4 transition-colors",
+                  "hover:border-accent hover:bg-muted/40 focus-visible:no-underline",
+                ]}
+              >
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="text-sm text-foreground/70">{slide.year}</p>
+                    <h3 class="mt-1 text-lg font-medium text-accent">
+                      {slide.title}
+                    </h3>
+                  </div>
+                  <span class="border border-border px-2 py-1 text-xs">
+                    PDF
+                  </span>
+                </div>
+                <p class="mt-4 text-sm">{slide.participants}</p>
+                <p class="mt-3 inline-flex items-center gap-1 text-sm text-accent">
+                  View slides
+                  <IconArrowRight class="size-4 transition-transform group-hover:translate-x-1 rtl:-rotate-180" />
+                </p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
 
     {
       recentPosts.length > 0 && (
