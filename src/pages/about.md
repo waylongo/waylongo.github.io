@@ -3,20 +3,12 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-你好，我是 Wenlong Wu。
+Hi 👋, I'm Waylon — I hold a PhD in Machine Learning, and I'm an occasional Kaggler. I currently work on a large-scale physiological signal foundation model at Xiaomi's wearables division.
 
-这里是我的个人主页。
+Instead of training task-specific models, I want to build a general-purpose backbone for physiological signals that works across devices and populations. It could support early disease risk prediction and long-term health modeling.
 
-这里会放一些简单的介绍、文章和项目记录。
+I also follow progress in physiological signal and tabular foundation models, especially the TabPFN series, and tinker with engineering tools for AI agents through projects like AutoResearch.
 
-## About This Site
+This site is where I jot things down as they come — sometimes a technical write-up, sometimes a project retrospective, or just something I learned recently.
 
-现在先保持一个比较简单的版本，后面我会再慢慢修改。
-
-你可以先在这里看到：
-
-- 一些文章
-- 一些项目记录
-- 一些个人信息
-
-如果你是从文章点进来的，欢迎先去 [Posts](/posts/) 看看我最近在写什么。
+If you're interested in any of these topics, feel free to browse my [Posts](/posts/) or find me on [GitHub](https://github.com/waylongo), [Google Scholar](https://scholar.google.com/citations?user=jIFN8T4AAAAJ&hl=en), and [LinkedIn](https://www.linkedin.com/in/wenlong-wu/).
