@@ -7,11 +7,16 @@ const breadcrumbList = currentUrlPath.split("/").slice(1);
 
 // Collapse paginated post routes into a single readable label
 if (breadcrumbList[0] === "posts") {
-  breadcrumbList.splice(0, 2, `Posts (page ${breadcrumbList[1] || 1})`);
+  const pageNumber = breadcrumbList[1];
+  breadcrumbList.splice(
+    0,
+    2,
+    pageNumber ? `Posts (page ${pageNumber})` : "Posts"
+  );
 }
 ---
 
-<nav class="app-layout mt-8 mb-1" aria-label="breadcrumb">
+<nav class="app-layout mt-8 mb-1" aria-label="Breadcrumb">
   <ul
     class="font-light [&>li]:inline [&>li:not(:last-child)>a]:hover:opacity-100"
   >

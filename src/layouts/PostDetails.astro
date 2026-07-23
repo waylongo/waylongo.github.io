@@ -55,6 +55,8 @@ const ogImage = ogImageUrl
 
 const layoutProps = {
   title: `${title} | ${SITE.title}`,
+  schemaHeadline: title,
+  pageType: "article" as const,
   author,
   description,
   pubDatetime,
@@ -199,14 +201,21 @@ const nextPost =
    *  allowing sharing of sections easily */
   function addHeadingLinks() {
     const headings = Array.from(
-      document.querySelectorAll("h2, h3, h4, h5, h6")
+      document.querySelectorAll(
+        "#article h2, #article h3, #article h4, #article h5, #article h6"
+      )
     );
     for (const heading of headings) {
+      if (!heading.id) continue;
+
+      const headingText = heading.textContent?.trim() || "section";
       heading.classList.add("group");
       const link = document.createElement("a");
       link.className =
-        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus:opacity-100";
+        "heading-link ms-2 no-underline opacity-75 md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100";
       link.href = "#" + heading.id;
+      link.ariaLabel = `Link to section: ${headingText}`;
+      link.title = `Link to section: ${headingText}`;
 
       const span = document.createElement("span");
       span.ariaHidden = "true";
