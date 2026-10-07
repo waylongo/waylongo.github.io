@@ -12,7 +12,7 @@ description: 从 KV Cache、API 计费和 Claude Code 的缓存设计出发，�
 
 > 这篇文章从 Transformer 原理到 API 计费，再到 Claude Code 的缓存设计拆一遍。看完你会知道大模型账单里的钱花在哪、为什么缓存能省 80%，以及调用习惯怎么影响账单。
 
-![Prompt Cache 费用对比：无缓存 vs 有缓存](/images/prompt-cache/fig0_cover.png)
+![Prompt Cache 费用对比：无缓存 vs 有缓存](@/assets/images/prompt-cache/fig0_cover.png)
 
 ---
 
@@ -32,7 +32,7 @@ description: 从 KV Cache、API 计费和 Claude Code 的缓存设计出发，�
 
 下面是我上个月的 Mify 账单：
 
-![真实账单截图](/images/prompt-cache/fig1_api_bill.jpeg)
+![真实账单截图](@/assets/images/prompt-cache/fig1_api_bill.jpeg)
 
 第一次看到这个账单的人通常会懵：缓存写入是什么？为什么有 5 分钟和 1 小时两种？缓存命中的费用为什么这么低/高？
 
@@ -71,7 +71,7 @@ description: 从 KV Cache、API 计费和 Claude Code 的缓存设计出发，�
 
 10 轮对话，你为系统提示付了 10 次全价。那 20K tokens 的内容一个字都没变，每次都要重新"读"一遍。
 
-![无缓存的 Token 增长](/images/prompt-cache/fig2_token_growth.png)
+![无缓存的 Token 增长](@/assets/images/prompt-cache/fig2_token_growth.png)
 
 没有缓存，你在为重复的内容反复付费。
 
@@ -109,7 +109,7 @@ Turn 4-6:          200ms 上下，波澜不惊
 
 两个问题：那个 100x 加速是什么？为什么大模型受益巨大，小模型却无感？
 
-![本地 KV Cache 实验：8B 级别模型 vs 0.8B 级别模型](/images/prompt-cache/fig3_local_experiment.png)
+![本地 KV Cache 实验：8B 级别模型 vs 0.8B 级别模型](@/assets/images/prompt-cache/fig3_local_experiment.png)
 
 ### 3.2 答案：注意力机制里的 KV
 
@@ -163,7 +163,7 @@ BERT 这类 encoder-only 模型用的是双向注意力，加一个新 token 会
 
 命中时两个模型速度几乎一样——都是从内存读取，计算量可以忽略。
 
-![KV Cache 原理图](/images/prompt-cache/fig4_kv_cache_principle.png)
+![KV Cache 原理图](@/assets/images/prompt-cache/fig4_kv_cache_principle.png)
 
 ---
 
@@ -183,7 +183,7 @@ KV Cache 是推理引擎内部的机制，让生成速度更快。还有另一�
 
 KV Cache 让你用得更快，Prompt Cache 让你花得更少。
 
-![两层缓存架构：Prompt Cache vs KV Cache](/images/prompt-cache/fig5_two_layer_cache.png)
+![两层缓存架构：Prompt Cache vs KV Cache](@/assets/images/prompt-cache/fig5_two_layer_cache.png)
 
 ### 4.2 Prompt Cache 的核心思路
 
@@ -243,7 +243,7 @@ OpenAI 的策略不同：自动缓存，不需要显式写 `cache_control`，也
 
 $0.765 vs $0.18，缓存省了 76%。轮数越多省得越多，20 轮以上的对话节省比例可达 85%+。
 
-![有缓存 vs 无缓存费用对比](/images/prompt-cache/fig6_cost_comparison.png)
+![有缓存 vs 无缓存费用对比](@/assets/images/prompt-cache/fig6_cost_comparison.png)
 
 ### 4.5 缓存有效期
 
@@ -299,7 +299,7 @@ CC 发出的 prompt 不是一整块，而是专门为缓存优化过的多层结
 
 Block 3 是所有 CC 请求共用的同一段静态内容，理论上命中率最高。注意：Anthropic 的缓存按组织隔离，不同组织之间不会共享缓存；同一组织内的不同 session，只要前缀相同，就有机会命中同一份缓存。
 
-![Claude Code Prompt 多层结构](/images/prompt-cache/fig7_cc_prompt_structure.png)
+![Claude Code Prompt 多层结构](@/assets/images/prompt-cache/fig7_cc_prompt_structure.png)
 
 ### 5.3 三个缓存断点
 
@@ -390,7 +390,7 @@ CC 在处理复杂任务时会启动子智能体：
 
 **Plan Agent（架构设计）**：复杂任务中也可能出现独立规划上下文。它的好处是让主线程更干净，代价是这类上下文通常不能直接复用主线程的完整消息缓存。
 
-![缓存链条：断在哪里后面全废](/images/prompt-cache/fig8_cache_chain.png)
+![缓存链条：断在哪里后面全废](@/assets/images/prompt-cache/fig8_cache_chain.png)
 
 ---
 
@@ -426,7 +426,7 @@ CC 在系统提示里注入当前日期，但只精确到天。如果精确到�
 
 规律：缓存层级是 tools → system → messages，上游变了，下游全废。
 
-![3 大缓存杀手](/images/prompt-cache/fig9_cache_killers.png)
+![3 大缓存杀手](@/assets/images/prompt-cache/fig9_cache_killers.png)
 
 ---
 

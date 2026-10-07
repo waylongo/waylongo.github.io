@@ -44,12 +44,12 @@ description: 通过 Autoresearch 在运动健康场景下的实践，展示 Agen
 可以看到，测试集的 AUC 从最初的 0.68 经过 200 多轮实验逐步提升到了 0.84，提升幅度约 23%。这时候你可能会问：是不是一开始的 baseline 太弱了？你之前人工做实验的结果是多少？我只能说，这个分数已经超过了我当时花两个多周手动探索的成绩，惊了。
 然而，在第四天凌晨，我熟睡之际，发生了一件让我崩溃的事。由于 autoresearch 的流程需要频繁回退 git，实验记录文件 `results.tsv` 不能纳入 git 管理。每次实验结束后，模型会在 `results.tsv` 末尾追加一行记录。但那天夜里，不知什么原因，模型竟然用当次的实验记录直接覆盖了整个 `results.tsv` 文件。也就是说，之前好几天积累的实验记录全部丢失了，而且由于没有纳入 git 管理，根本无法恢复。虽然改好的 `train.py` 代码还在，但具体哪些改动有效、哪些无效，这些宝贵的记录都没了。上面那张图还是我中途发给别人时保存下来的，否则连这点记录都不剩了。···
 
-![Minimax M2.7 results](/images/health-autoresearch/minimax-m2.7-results.jpeg)
+![Minimax M2.7 results](@/assets/images/health-autoresearch/minimax-m2.7-results.jpeg)
 
 ### 2.2 第二轮 - Opus 4.6
 第一轮的失败可以说是模型"开小差"导致所有实验记录功亏一篑。正好，神通广大的领导搞到了 Kiro 的会员，可以使用 Claude 的 Opus 4.6——可以说是当前大模型性能的天花板。于是我决定再来一次。Minimax 2.7 下台，Opus 4.6 上场。
 
-![Claude Opus 4.6 results](/images/health-autoresearch/opus-4.6-results.png)
+![Claude Opus 4.6 results](@/assets/images/health-autoresearch/opus-4.6-results.png)
 
 你大爷终究是你大爷：Opus 4.6 仅迭代了几十轮，就已经超过了 Minimax 2.7 迭代 200 多轮的成绩。而且在 100 多轮后，AUC 已经突破了 0.9，相比初始 baseline 提升了约 30%，相较 Minimax 2.7 的最佳成绩也提升了约 7%。Respect！
 不过，仔细审视实验过程后，我发现了一个问题。前期的改动还算合理，但到了后期模型缺乏优化思路时，它竟然直接修改了我的 train/valid 划分——从最初的 80/20 改成了 90/10 甚至 95/5。换句话说，评测数据集变了，它做着做着题，把题目本身给改了。这让我想起 Anthropic 之前发布的一篇报告：在评测 Claude 时，模型发现自己在做题，于是自己上网找到了题目的答案。本质上都是同一类问题——当 Agent 的目标是"提升指标"时，它可能会选择"改变规则"而非"提升能力"来达成目标。

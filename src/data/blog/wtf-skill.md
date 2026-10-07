@@ -14,7 +14,7 @@ description: 把穿戴健康领域的厂商动态、学术论文和 FDA 信号�
 
 **Wearables Tech Frontiers**（简称 `/wtf`）是我为这个场景做的一个轻量情报工具：维护固定的信息源，每周自动生成中心 feed，经过规则过滤后交给 Claude Code 或 Codex 生成结构化摘要——不做临场搜索，输出可复现。
 
-![信息源覆盖](/images/wtf-skill/wtf-source-map.png)
+![信息源覆盖](@/assets/images/wtf-skill/wtf-source-map.png)
 
 ## 适合谁用
 
@@ -37,7 +37,7 @@ description: 把穿戴健康领域的厂商动态、学术论文和 FDA 信号�
 
 默认窗口是过去 30 天。在本月实际运行中，原始 feed 有 1010 条，经过黑名单、关键词、日期和来源质量过滤后，42 条进入摘要——过滤比约 96%，保留的都是真正有信号价值的内容。
 
-![Digest 输出预览](/images/wtf-skill/wtf-digest-preview.png)
+![Digest 输出预览](@/assets/images/wtf-skill/wtf-digest-preview.png)
 
 摘要按固定栏目组织：
 
@@ -49,7 +49,7 @@ description: 把穿戴健康领域的厂商动态、学术论文和 FDA 信号�
 
 每条都保留 URL，方便继续追原文。生成摘要后，还可以选择导出为 16:9 的 HTML slide report 或 PDF。
 
-![Slide Report 预览](/images/wtf-skill/wtf-slide-preview.png)
+![Slide Report 预览](@/assets/images/wtf-skill/wtf-slide-preview.png)
 
 ## 为什么"可控"是核心
 

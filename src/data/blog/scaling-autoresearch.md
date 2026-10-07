@@ -60,13 +60,13 @@ Andrej Karpathy 发布了 autoresearch 项目：让 AI agent 自主设计实验�
 | final_valid_loss | 6.5699（epoch 3 后反弹） | 6.1195（5 epoch 单调下降） | -0.45 |
 | final_SER        | 75.30                    | 106.08（更健康）           | +30   |
 
-![全局优化曲线](/images/scaling-autoresearch/global-curve.png)
+![全局优化曲线](@/assets/images/scaling-autoresearch/global-curve.png)
 
 上图是 180 条记录按时间顺序排列的 min_valid_loss 散点，绿色阶梯线是全局 running best。前 25 次实验下降最快（6.31 → 6.19），来自最早的两次突破；此后边际收益递减，约第 75 次之后 running best 进入 6.13-6.12 区间，后面 100 次实验只再贡献了约 0.01——这就是 plateau。
 
 值得一提的是，中途出现过几次 loss 看似更低、但 SER 坍缩的"假突破"，全部被三道 gate 拦了下来——事前设计的约束规则确实在关键时刻起了作用。
 
-![分 worktree 优化曲线](/images/scaling-autoresearch/worktree-curve.png)
+![分 worktree 优化曲线](@/assets/images/scaling-autoresearch/worktree-curve.png)
 
 上图是 6 条分支各自的 running best 随 wave 推进的变化。它们从差异明显的起点出发，最终全部收敛到 6.12-6.13 的狭窄区间；其中 gpu1 和 gpu3 沿完全不同的路径到达了同一个最优配置。多条独立路径指向同一区域，说明结果不是某条分支碰巧撞上的局部最优——这是可信度的强信号。
 
